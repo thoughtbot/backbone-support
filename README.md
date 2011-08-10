@@ -2,6 +2,14 @@
 
 Helper and utility classes that fill out Backbone for serious development.
 
+## dependencies
+
+You'll need these, but chances are you already have them in your app:
+
+* jQuery
+* Underscore
+* Backbone
+
 ## development
 
 First:
