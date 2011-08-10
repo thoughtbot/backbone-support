@@ -13,11 +13,22 @@ describe("SwappingRouter", function() {
     }
   });
 
+  var leaveView = Backbone.View.extend({
+    leave: function() {
+    }
+  });
+  var leaveViewInstance = new leaveView();
+
+  var sleep = function() {
+    waits(10);
+  };
+
   var routerSubclass = Support.SwappingRouter.extend({
     routes: {
       "test": "index",
       "red": "red",
-      "blue": "blue"
+      "blue": "blue",
+      "leave": "leave"
     },
 
     index: function() {
@@ -29,6 +40,10 @@ describe("SwappingRouter", function() {
 
     blue: function() {
       this.swap(new blueView());
+    },
+
+    leave: function() {
+      this.swap(leaveViewInstance);
     }
   });
   var router = new routerSubclass({});
@@ -53,7 +68,7 @@ describe("SwappingRouter", function() {
       window.location.hash = "#test"
     });
 
-    waits(50);
+    sleep();
 
     runs(function() {
       expect(spy.called).toBeTruthy();
@@ -65,22 +80,43 @@ describe("SwappingRouter", function() {
       window.location.hash = "#red"
     });
 
-    waits(50);
+    sleep();
 
     runs(function() {
       expect($("#test").text()).toEqual("Red!");
     });
 
-    waits(50);
+    sleep();
 
     runs(function() {
       window.location.hash = "#blue"
     });
 
-    waits(50);
+    sleep();
 
     runs(function() {
       expect($("#test").text()).toEqual("Blue!");
+    });
+  });
+
+  it("calls leave if it exists on a view", function() {
+    var spy = sinon.spy(leaveViewInstance, "leave");
+
+    runs(function() {
+      window.location.hash = "#leave"
+    });
+
+    sleep();
+
+    runs(function() {
+      window.location.hash = "#red"
+    });
+
+    sleep();
+
+    runs(function() {
+      expect($("#test").text()).toEqual("Red!");
+      expect(spy.called).toBeTruthy();
     });
   });
 });
