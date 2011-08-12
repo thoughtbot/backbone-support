@@ -121,13 +121,13 @@ describe("Support.CompositeView", function() {
 
       expect($("#test1").size()).toEqual(1);
       expect($("#test2").size()).toEqual(1);
-      expect(view.children.length).toEqual(2);
+      expect(view.children.size()).toEqual(2);
 
       childView.leave();
 
       expect($("#test1").size()).toEqual(0);
       expect($("#test2").size()).toEqual(1);
-      expect(view.children.length).toEqual(1);
+      expect(view.children.size()).toEqual(1);
     });
   });
 });
