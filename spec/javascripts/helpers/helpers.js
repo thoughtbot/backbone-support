@@ -5,11 +5,15 @@ var Helpers = {
 
   setup: function() {
     this.teardown();
-    $("body").append("<div id='test'></div>");
+    this.append("test");
   },
 
   teardown: function() {
     window.location.hash = "#"
-    $("#test").remove();
+    $(".test").remove();
+  },
+
+  append: function(id) {
+    $("body").append("<div class='test' id='" + id + "'></div>");
   }
 };

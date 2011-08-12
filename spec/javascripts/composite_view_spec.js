@@ -1,4 +1,4 @@
-describe("CompositeView", function() {
+describe("Support.CompositeView", function() {
   var orangeView = Support.CompositeView.extend({
     render: function() {
       var text = this.make("span", {}, "Orange!");
@@ -6,41 +6,106 @@ describe("CompositeView", function() {
     }
   });
 
+  var blankView = Support.CompositeView.extend({
+    render: function() {
+    }
+  });
+
+  var normalView = Backbone.View.extend({
+    render: function() {
+      var text = this.make("span", {}, "Normal!");
+      $(this.el).append(text);
+    }
+  });
+
   beforeEach(function() {
     Helpers.setup();
-    $("body").append("<div id='test'></div>");
+    Helpers.append("test1");
+    Helpers.append("test2");
   });
 
   afterEach(function() {
     Helpers.teardown();
   });
 
-  it("removes elements and events when leave() is called", function() {
-    var view = new orangeView();
-    var spy = sinon.spy(view, "unbind");
+  describe("#renderChild", function() {
+    it("renders children views", function() {
+      var view = new blankView();
+      view.renderChild(new orangeView({el: "#test1"}));
+      view.renderChild(new orangeView({el: "#test2"}));
 
-    runs(function() {
-      view.render();
-      $("#test").append(view.el);
+      expect($("#test1").text()).toEqual("Orange!");
+      expect($("#test2").text()).toEqual("Orange!");
+    });
+  });
+
+  describe("#leave", function() {
+    it("removes elements and events when leave() is called", function() {
+      var view = new orangeView();
+      var spy = sinon.spy(view, "unbind");
+
+      runs(function() {
+        view.render();
+        $("#test").append(view.el);
+      });
+
+      Helpers.sleep();
+
+      runs(function() {
+        expect($("#test").text()).toEqual("Orange!");
+      });
+
+      Helpers.sleep();
+
+      runs(function() {
+        view.leave();
+      });
+
+      Helpers.sleep();
+
+      runs(function() {
+        expect($("#test").text()).toEqual("");
+        expect(spy.called).toBeTruthy();
+      });
     });
 
-    Helpers.sleep();
+    it("removes children views on leave", function() {
+      var view = new blankView();
+      view.renderChild(new orangeView({el: "#test1"}));
+      view.renderChild(new orangeView({el: "#test2"}));
 
-    runs(function() {
-      expect($("#test").text()).toEqual("Orange!");
-    });
-
-    Helpers.sleep();
-
-    runs(function() {
       view.leave();
+
+      expect($("#test1").size()).toEqual(0);
+      expect($("#test2").size()).toEqual(0);
     });
 
-    Helpers.sleep();
+    it("doesn't fail on normal backbone views that may be children", function() {
+      var view = new blankView();
+      view.renderChild(new orangeView({el: "#test1"}));
+      view.renderChild(new normalView({el: "#test2"}));
 
-    runs(function() {
-      expect($("#test").text()).toEqual("");
-      expect(spy.called).toBeTruthy();
+      view.leave();
+
+      expect($("#test1").size()).toEqual(0);
+      expect($("#test2").size()).toEqual(1);
+    });
+
+    it("removes self from parent if invoked on a child view", function() {
+      var view = new blankView();
+      var childView = new orangeView({el: "#test1"});
+      view.renderChild(childView)
+      view.renderChild(new orangeView({el: "#test2"}));
+
+      expect($("#test1").size()).toEqual(1);
+      expect($("#test2").size()).toEqual(1);
+      expect(view.children.length).toEqual(2);
+
+      childView.leave();
+
+      expect($("#test1").size()).toEqual(0);
+      expect($("#test2").size()).toEqual(1);
+      expect(view.children.length).toEqual(1);
     });
   });
 });

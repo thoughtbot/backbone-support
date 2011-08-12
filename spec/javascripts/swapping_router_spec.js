@@ -46,13 +46,12 @@ describe("SwappingRouter", function() {
 
   beforeEach(function() {
     Helpers.setup();
-    $("body").append("<div id='test'></div>");
 
     if(!historyStarted) {
       historyStarted = true;
       Backbone.history.start();
     }
-    router.el = $("#test");
+    router.el = "#test";
   });
 
   afterEach(function() {
