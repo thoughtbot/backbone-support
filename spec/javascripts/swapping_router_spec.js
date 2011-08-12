@@ -1,4 +1,4 @@
-describe("SwappingRouter", function() {
+describe("Support.SwappingRouter", function() {
   var historyStarted = false;
 
   var redView = Backbone.View.extend({
