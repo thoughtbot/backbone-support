@@ -19,10 +19,6 @@ describe("SwappingRouter", function() {
   });
   var leaveViewInstance = new leaveView();
 
-  var sleep = function() {
-    waits(10);
-  };
-
   var routerSubclass = Support.SwappingRouter.extend({
     routes: {
       "test": "index",
@@ -49,15 +45,18 @@ describe("SwappingRouter", function() {
   var router = new routerSubclass({});
 
   beforeEach(function() {
-    window.location.hash = "#";
-    $("#test").remove();
+    Helpers.setup();
+    $("body").append("<div id='test'></div>");
 
     if(!historyStarted) {
       historyStarted = true;
       Backbone.history.start();
     }
-    $("body").append("<div id='test'></div>");
     router.el = $("#test");
+  });
+
+  afterEach(function() {
+    Helpers.teardown();
   });
 
   it("should be a backbone router", function() {
@@ -68,7 +67,7 @@ describe("SwappingRouter", function() {
       window.location.hash = "#test"
     });
 
-    sleep();
+    Helpers.sleep();
 
     runs(function() {
       expect(spy.called).toBeTruthy();
@@ -80,19 +79,19 @@ describe("SwappingRouter", function() {
       window.location.hash = "#red"
     });
 
-    sleep();
+    Helpers.sleep();
 
     runs(function() {
       expect($("#test").text()).toEqual("Red!");
     });
 
-    sleep();
+    Helpers.sleep();
 
     runs(function() {
       window.location.hash = "#blue"
     });
 
-    sleep();
+    Helpers.sleep();
 
     runs(function() {
       expect($("#test").text()).toEqual("Blue!");
@@ -106,13 +105,13 @@ describe("SwappingRouter", function() {
       window.location.hash = "#leave"
     });
 
-    sleep();
+    Helpers.sleep();
 
     runs(function() {
       window.location.hash = "#red"
     });
 
-    sleep();
+    Helpers.sleep();
 
     runs(function() {
       expect($("#test").text()).toEqual("Red!");
