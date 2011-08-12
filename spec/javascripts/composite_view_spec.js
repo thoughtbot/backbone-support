@@ -39,6 +39,28 @@ describe("Support.CompositeView", function() {
     });
   });
 
+  describe("#appendChild", function() {
+    it("renders and appends children views", function() {
+      var view = new blankView({el: "#test"});
+      view.appendChild(new orangeView());
+      view.appendChild(new orangeView());
+
+      expect($("#test").text()).toEqual("Orange!Orange!");
+    });
+  });
+
+  describe("#renderChildInto", function() {
+    it("renders child into the given element and replaces content there", function() {
+      $("#test1").text("Replace this!");
+
+      var view = new blankView({el: "#test"});
+      view.renderChildInto(new orangeView(), "#test1");
+
+      expect($("#test").text()).toEqual("");
+      expect($("#test1").text()).toEqual("Orange!");
+    });
+  });
+
   describe("#leave", function() {
     it("removes elements and events when leave() is called", function() {
       var view = new orangeView();
