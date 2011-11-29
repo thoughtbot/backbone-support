@@ -132,7 +132,7 @@ In your `config/application.rb`:
 
 ``` ruby
 config.middleware.use Rack::Static, 
-                      :urls => ['/vendor/plugins/backbone-support/lib/assets']
+                      :urls => ['/vendor/plugins/backbone-support/lib/assets/javascripts']
 ```
 
 And in your `config/assets.yml`:
@@ -166,9 +166,9 @@ requirePublic = function(path) {
 requirePublic("vendor/underscore.js");
 requirePublic("vendor/backbone.js");
 
-require("/vendor/plugins/backbone-support/lib/assets/backbone-support.js");
-require("/vendor/plugins/backbone-support/lib/assets/backbone-support/composite_view.js");
-require("/vendor/plugins/backbone-support/lib/assets/backbone-support/swapping_router.js");
+require("/vendor/plugins/backbone-support/lib/assets/javascripts/backbone-support.js");
+require("/vendor/plugins/backbone-support/lib/assets/javascripts/backbone-support/composite_view.js");
+require("/vendor/plugins/backbone-support/lib/assets/javascripts/backbone-support/swapping_router.js");
 ```
 
 ## License
