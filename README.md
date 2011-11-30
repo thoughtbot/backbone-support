@@ -5,7 +5,7 @@ http://workshops.thoughtbot.com/backbone-js-on-rails
 
 The book contains complete instructions and in-depth coverage of the internals
 of CompositeView and Swappingrouter, and an example application that shows
-their usage 
+their usage.
 
 ### SwappingRouter
 
@@ -24,7 +24,7 @@ view by rendering that view into its own `el`:
       if (this.currentView && this.currentView.leave) {
         this.currentView.leave();
       }
-  
+
       this.currentView = newView;
       this.currentView.render();
       $(this.el).empty().append(this.currentView.el);
@@ -74,7 +74,7 @@ maintain a back-reference at `this.parent`. This is used to reach up and call
 
 You'll need these, but chances are you already have them in your app:
 
-* jQuery
+* jQuery or Zepto
 * Underscore
 * Backbone
 
@@ -131,7 +131,7 @@ First off:
 In your `config/application.rb`:
 
 ``` ruby
-config.middleware.use Rack::Static, 
+config.middleware.use Rack::Static,
                       :urls => ['/vendor/plugins/backbone-support/lib/assets/javascripts']
 ```
 
@@ -156,7 +156,6 @@ end
 
 Your individual specs will then need the full root path in `require`. For
 example:
-
 
 ``` js
 requirePublic = function(path) {
