@@ -1,10 +1,15 @@
-Helper and utility classes that fill out Backbone for serious development.
+There's no built-in garbage collection for Backbone’s event bindings, and 
+forgetting to unbind can cause bugs and memory leaks.
+
+Backbone Support currently provides two utility classes, SwappingRouter and CompositeView,
+that introduce a `leave()` function, which unbinds and cleans up the view.
+They should be used where views are instantiated (in Router instances and in composite views).
 
 Inspired by our projects and the Backbone.js on Rails book:
 http://workshops.thoughtbot.com/backbone-js-on-rails
 
 The book contains complete instructions and in-depth coverage of the internals
-of CompositeView and Swappingrouter, and an example application that shows
+of CompositeView and SwappingRouter, and an example application that shows
 their usage.
 
 ### SwappingRouter
