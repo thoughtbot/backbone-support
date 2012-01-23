@@ -14,6 +14,8 @@ src_files:
     - vendor/jquery.js
     - vendor/underscore.js
     - vendor/backbone.js
+    - lib/assets/javascripts/backbone-support.js
+    - lib/assets/javascripts/backbone-support/support.js
     - lib/**/*.js
 
 # spec_files
