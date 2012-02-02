@@ -1,8 +1,8 @@
 0.2.0
 
-The version changes the order of the when a view has render called on it when
-it is being swapped by a SwappingRouter. This fixes some browsers which would
-display a flash of unstyled content when performing certain actions in their
+The version changes the order of when a view has render called on it when
+being swapped by a SwappingRouter. This fixes an issue in some browsers which 
+would display a flash of unstyled content when performing certain actions in their
 render, like changing the body class. It introduces the requirement that all
 views return an instance of themselves when rendered (a fairly standard
 backbone convention).
