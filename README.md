@@ -93,7 +93,7 @@ While TDD'ing:
 
     bundle exec rake jasmine
 
-To not open tests a browser window:
+To not open tests in a browser window:
 
     bundle exec rake jasmine:ci
 
