@@ -19,8 +19,8 @@ A Router subclass the provides a standard way to swap one view for another.
 This introduces a convention that all views have a `leave()` function,
 responsible for unbinding and cleaning up the view. And the convention that
 all actions underneath the same `Router` share the same root element, and
-define it as `el` on the router. It also requires that all view's render
-method returns the view itself (a fairly standard backbone convention).
+define it as `el` on the router. Additionally, the render method for every
+view must return that view (a fairly standard backbone convention).
 
 Now, a `SwappingRouter` can take advantage of the `leave()` function, and
 clean up any existing views before swapping to a new one.  It swaps into a new
