@@ -45,7 +45,7 @@ An example SwappingRouter would look as follows:
         "stories": "index",
         "stories/new": "newStory"
       }
-      index: function(story_id) {
+      index: function() {
         var view = new Trajectory.Views.StoriesIndex();
         this.swap(view);
       },
