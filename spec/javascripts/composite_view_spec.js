@@ -82,6 +82,18 @@ describe("Support.CompositeView", function() {
       expect($("#test1").text()).toEqual("Append to this!Orange!");
     });
   });
+  
+  describe("#prependChildTo", function() {
+    it("prepends child into the given element", function() {
+      $("#test1").text("Prepend to this!");
+  
+      var view = new blankView({el: "#test"});
+      view.prependChildTo(new orangeView(), "#test1");
+  
+      expect($("#test").text()).toEqual("");
+      expect($("#test1").text()).toEqual("Orange!Prepend to this!");
+    });
+  });
 
   describe("#leave", function() {
     it("removes elements and events when leave() is called", function() {
