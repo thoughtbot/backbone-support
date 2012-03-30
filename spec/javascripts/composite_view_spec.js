@@ -38,6 +38,18 @@ describe("Support.CompositeView", function() {
       expect($("#test2").text()).toEqual("Orange!");
     });
   });
+  
+  describe("#renderChildInto", function() {
+    it("renders child into the given element and replaces content there", function() {
+      $("#test1").text("Replace this!");
+
+      var view = new blankView({el: "#test"});
+      view.renderChildInto(new orangeView(), "#test1");
+
+      expect($("#test").text()).toEqual("");
+      expect($("#test1").text()).toEqual("Orange!");
+    });
+  });
 
   describe("#appendChild", function() {
     it("renders and appends children views", function() {
@@ -49,15 +61,37 @@ describe("Support.CompositeView", function() {
     });
   });
 
-  describe("#renderChildInto", function() {
-    it("renders child into the given element and replaces content there", function() {
-      $("#test1").text("Replace this!");
-
+  describe("#appendChildTo", function() {
+    it("appends child into the given element", function() {
+      $("#test1").text("Append to this!");
+  
       var view = new blankView({el: "#test"});
-      view.renderChildInto(new orangeView(), "#test1");
-
+      view.appendChildTo(new orangeView(), "#test1");
+  
       expect($("#test").text()).toEqual("");
-      expect($("#test1").text()).toEqual("Orange!");
+      expect($("#test1").text()).toEqual("Append to this!Orange!");
+    });
+  });
+  
+  describe("#prependChild", function() {
+    it("renders and prepends children views", function() {
+      var view = new blankView({el: "#test"});
+      view.prependChild(new orangeView());
+      view.prependChild(new normalView());
+  
+      expect($("#test").text()).toEqual("Normal!Orange!");
+    });
+  });
+  
+  describe("#prependChildTo", function() {
+    it("prepends child into the given element", function() {
+      $("#test1").text("Prepend to this!");
+  
+      var view = new blankView({el: "#test"});
+      view.prependChildTo(new orangeView(), "#test1");
+  
+      expect($("#test").text()).toEqual("");
+      expect($("#test1").text()).toEqual("Orange!Prepend to this!");
     });
   });
 
