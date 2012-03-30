@@ -38,17 +38,7 @@ describe("Support.CompositeView", function() {
       expect($("#test2").text()).toEqual("Orange!");
     });
   });
-
-  describe("#appendChild", function() {
-    it("renders and appends children views", function() {
-      var view = new blankView({el: "#test"});
-      view.appendChild(new orangeView());
-      view.appendChild(new orangeView());
-
-      expect($("#test").text()).toEqual("Orange!Orange!");
-    });
-  });
-
+  
   describe("#renderChildInto", function() {
     it("renders child into the given element and replaces content there", function() {
       $("#test1").text("Replace this!");
@@ -60,14 +50,14 @@ describe("Support.CompositeView", function() {
       expect($("#test1").text()).toEqual("Orange!");
     });
   });
-  
-  describe("#prependChild", function() {
-    it("renders and prepends children views", function() {
+
+  describe("#appendChild", function() {
+    it("renders and appends children views", function() {
       var view = new blankView({el: "#test"});
-      view.prependChild(new orangeView());
-      view.prependChild(new normalView());
-  
-      expect($("#test").text()).toEqual("Normal!Orange!");
+      view.appendChild(new orangeView());
+      view.appendChild(new orangeView());
+
+      expect($("#test").text()).toEqual("Orange!Orange!");
     });
   });
 
@@ -80,6 +70,16 @@ describe("Support.CompositeView", function() {
   
       expect($("#test").text()).toEqual("");
       expect($("#test1").text()).toEqual("Append to this!Orange!");
+    });
+  });
+  
+  describe("#prependChild", function() {
+    it("renders and prepends children views", function() {
+      var view = new blankView({el: "#test"});
+      view.prependChild(new orangeView());
+      view.prependChild(new normalView());
+  
+      expect($("#test").text()).toEqual("Normal!Orange!");
     });
   });
   
