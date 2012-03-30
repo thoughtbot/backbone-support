@@ -60,6 +60,16 @@ describe("Support.CompositeView", function() {
       expect($("#test1").text()).toEqual("Orange!");
     });
   });
+  
+  describe("#prependChild", function() {
+    it("renders and prepends children views", function() {
+      var view = new blankView({el: "#test"});
+      view.prependChild(new orangeView());
+      view.prependChild(new normalView());
+  
+      expect($("#test").text()).toEqual("Normal!Orange!");
+    });
+  });
 
   describe("#leave", function() {
     it("removes elements and events when leave() is called", function() {
