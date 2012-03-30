@@ -71,6 +71,18 @@ describe("Support.CompositeView", function() {
     });
   });
 
+  describe("#appendChildTo", function() {
+    it("appends child into the given element", function() {
+      $("#test1").text("Append to this!");
+  
+      var view = new blankView({el: "#test"});
+      view.appendChildTo(new orangeView(), "#test1");
+  
+      expect($("#test").text()).toEqual("");
+      expect($("#test1").text()).toEqual("Append to this!Orange!");
+    });
+  });
+
   describe("#leave", function() {
     it("removes elements and events when leave() is called", function() {
       var view = new orangeView();
