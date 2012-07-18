@@ -3,6 +3,11 @@ describe("Support.CompositeView", function() {
     render: function() {
       var text = this.make("span", {}, "Orange!");
       $(this.el).append(text);
+    },
+
+    onLeave: function() {
+      var text = this.make("span", {}, "onLeave!");
+      $(this.el).append(text);
     }
   });
 
@@ -164,4 +169,37 @@ describe("Support.CompositeView", function() {
       expect(view.children.size()).toEqual(1);
     });
   });
+
+ describe("#onLeave", function() {
+    it("firest callback onLeave before view is removed", function() {
+      var view = new orangeView();
+      var spy = sinon.spy(view, "onLeave");
+
+      runs(function() {
+        view.render();
+        $("#test").append(view.el);
+      });
+
+      Helpers.sleep();
+
+      runs(function() {
+        expect($("#test").text()).toEqual("Orange!");
+      });
+
+      Helpers.sleep();
+
+      runs(function() {
+        view.leave();
+      });
+
+      Helpers.sleep();
+
+      runs(function() {
+        expect($("#test").text()).toEqual("");
+        expect(spy.called).toBeTruthy();
+      });
+    });
+ });
+
+
 });
