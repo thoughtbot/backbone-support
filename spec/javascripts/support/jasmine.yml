@@ -16,6 +16,7 @@ src_files:
     - vendor/backbone.js
     - lib/assets/javascripts/backbone-support.js
     - lib/assets/javascripts/backbone-support/support.js
+    - lib/assets/javascripts/backbone-support/observer.js
     - lib/**/*.js
 
 # spec_files
