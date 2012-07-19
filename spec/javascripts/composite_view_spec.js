@@ -230,4 +230,51 @@ describe("Support.CompositeView", function() {
       mock.verify();
     });
   });
+
+  describe("#unbindFromAll", function() {
+    var view, spy, mock;
+    beforeEach(function() {
+      view = new orangeView();
+      spy = sinon.spy(view, 'unbindFromAll');
+      callback = sinon.spy();
+      source = new Backbone.Model({
+        title: 'Model or Collection'
+      });
+      unbindSpy = sinon.spy(source, 'unbind');
+
+      runs(function() {
+        view.render();
+        view.bindTo(source, 'foo', callback);
+        view.bindTo(source, 'bar', callback);
+        expect(view.bindings.length).toEqual(2);
+      });
+
+      Helpers.sleep();
+
+      runs(function() {
+        view.leave();
+      });
+
+      Helpers.sleep();
+    });
+
+    it("calls the unbindFromAll method when leaving the view", function() {
+      runs(function() {
+        expect(spy.called).toBeTruthy();
+      });
+    });
+
+    it("calls unbind on the source object", function() {
+      runs(function() {
+        expect(unbindSpy.calledTwice).toBeTruthy();
+      });
+    });
+
+    it("removes all the views bindings attached with bindTo", function() {
+      runs(function() {
+        expect(view.bindings.length).toEqual(0);
+      });
+    });
+  });
+
 });
