@@ -201,5 +201,33 @@ describe("Support.CompositeView", function() {
     });
  });
 
+ describe("#bindTo", function() {
+    var view, spy, source, callback;
+    beforeEach(function() { Helpers.setup();
+      view = new orangeView();
+      spy = sinon.spy(view, "bindTo");
+      callback = sinon.spy();
 
+      source = new Backbone.Model({
+        title: 'Model or Collection'
+      });
+    });
+
+    afterEach(function() {
+      view, spy, source, callback = null;
+    });
+
+    it("should add the event to the bindings for the view", function() {
+      view.bindTo(source, 'foobar', callback);
+      expect(view.bindings.length).toEqual(1);
+    });
+
+    it("binds the event to the source object", function() {
+      var mock = sinon.mock(source).expects('bind').once();
+
+      view.bindTo(source, 'change:title', callback);
+
+      mock.verify();
+    });
+  });
 });
