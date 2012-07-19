@@ -170,7 +170,7 @@ describe("Support.CompositeView", function() {
     });
   });
 
- describe("#onLeave", function() {
+  describe("#onLeave", function() {
     it("fires callback onLeave before view is removed", function() {
       var view = new orangeView();
       var spy = sinon.spy(view, "onLeave");
@@ -199,6 +199,48 @@ describe("Support.CompositeView", function() {
         expect(spy.called).toBeTruthy();
       });
     });
- });
+  });
+
+  describe("#bindTo", function() {
+    var view = new orangeView();
+    var callback = sinon.spy();
+    var source = new Backbone.Model({
+        title: 'Model or Collection'
+    });
+
+    it("calls the unbindFromAll method when leaving the view", function() {
+      view.bindTo(source, 'foobar', callback);
+      expect(view.bindings.length).toEqual(1);
+    });
+  });
+
+  describe("#unbindFromAll", function() {
+    var view = new orangeView();
+    var spy = sinon.spy(view, 'unbindFromAll');
+    var callback = sinon.spy();
+    var source = new Backbone.Model({
+        title: 'Model or Collection'
+    });
+
+    runs(function() {
+      view.render();
+      view.bindTo(source, 'foo', callback);
+      expect(view.bindings.length).toEqual(1);
+    });
+
+    Helpers.sleep();
+
+    runs(function() {
+      view.leave();
+    });
+
+    Helpers.sleep();
+
+    it("calls the unbindFromAll method when leaving the view", function() {
+      runs(function() {
+        expect(spy.called).toBeTruthy();
+      });
+    });
+  });
 
 });
