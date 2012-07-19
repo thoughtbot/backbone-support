@@ -171,7 +171,7 @@ describe("Support.CompositeView", function() {
   });
 
  describe("#onLeave", function() {
-    it("firest callback onLeave before view is removed", function() {
+    it("fires callback onLeave before view is removed", function() {
       var view = new orangeView();
       var spy = sinon.spy(view, "onLeave");
 
