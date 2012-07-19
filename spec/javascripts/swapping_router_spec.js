@@ -4,12 +4,14 @@ describe("Support.SwappingRouter", function() {
   var redView = Backbone.View.extend({
     render: function() {
       $(this.el).text("Red!");
+      return this;
     }
   });
 
   var blueView = Backbone.View.extend({
     render: function() {
       $(this.el).text("Blue!");
+      return this;
     }
   });
 
@@ -75,7 +77,8 @@ describe("Support.SwappingRouter", function() {
 
   it("renders and swaps backbone views", function() {
     runs(function() {
-      window.location.hash = "#red"
+      //window.location.hash = "#red"
+      router.navigate('red', {trigger: true});
     });
 
     Helpers.sleep();
