@@ -1,12 +1,16 @@
 describe("Support.CompositeView", function() {
   var orangeView = Support.CompositeView.extend({
-    render: function() {
-      var text = this.make("span", {}, "Orange!");
-      $(this.el).append(text);
+    initialize: function() {
+      this.bind('onLeave', this.onLeave);
     },
 
     onLeave: function() {
       var text = this.make("span", {}, "onLeave!");
+      $(this.el).append(text);
+    },
+
+    render: function() {
+      var text = this.make("span", {}, "Orange!");
       $(this.el).append(text);
     }
   });
@@ -130,6 +134,33 @@ describe("Support.CompositeView", function() {
       });
     });
 
+    it("triggers the onLeave event", function() {
+      var view = new orangeView();
+      var spy = sinon.spy(view, "trigger");
+      var stubRemove = sinon.stub(view, "remove");
+
+      view.leave();
+
+      runs(function() {
+        $("#test").append(view.el);
+        view.render();
+      });
+
+      Helpers.sleep();
+
+      runs(function() {
+        view.leave();
+      });
+
+      Helpers.sleep();
+
+      runs(function() {
+        expect(spy.called).toBeTruthy();
+        expect(spy.getCall(0).args[0]).toEqual('onLeave');
+        expect($("#test").text()).toEqual("onLeave!Orange!");
+      });
+    });
+
     it("removes children views on leave", function() {
       var view = new blankView();
       view.renderChild(new orangeView({el: "#test1"}));
@@ -170,6 +201,7 @@ describe("Support.CompositeView", function() {
     });
   });
 
+  /*
   describe("#onLeave", function() {
     it("fires callback onLeave before view is removed", function() {
       var view = new orangeView();
@@ -200,6 +232,7 @@ describe("Support.CompositeView", function() {
       });
     });
   });
+ */
 
   describe("#bindTo", function() {
     var view = new orangeView();
