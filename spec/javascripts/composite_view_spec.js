@@ -1,5 +1,14 @@
 describe("Support.CompositeView", function() {
   var orangeView = Support.CompositeView.extend({
+    initialize: function() {
+      this.bind('leave', this.onLeave);
+    },
+
+   onLeave: function() {
+      var text = this.make("span", {}, "Leave!");
+      $(this.el).append(text);
+    },
+
     render: function() {
       var text = this.make("span", {}, "Orange!");
       $(this.el).append(text);
@@ -125,6 +134,33 @@ describe("Support.CompositeView", function() {
       });
     });
 
+    it("triggers the leave event", function() {
+      var view = new orangeView();
+      var spy = sinon.spy(view, "trigger");
+      var stubRemove = sinon.stub(view, "remove");
+
+      view.leave();
+
+      runs(function() {
+        $("#test").append(view.el);
+        view.render();
+      });
+
+      Helpers.sleep();
+
+      runs(function() {
+        view.leave();
+      });
+
+      Helpers.sleep();
+
+      runs(function() {
+        expect(spy.called).toBeTruthy();
+        expect(spy.getCall(0).args[0]).toEqual('leave');
+        expect($("#test").text()).toEqual("Leave!Orange!");
+      });
+    });
+
     it("removes children views on leave", function() {
       var view = new blankView();
       view.renderChild(new orangeView({el: "#test1"}));
@@ -164,4 +200,80 @@ describe("Support.CompositeView", function() {
       expect(view.children.size()).toEqual(1);
     });
   });
+
+  /*
+  describe("#onLeave", function() {
+    it("fires callback onLeave before view is removed", function() {
+      var view = new orangeView();
+      var spy = sinon.spy(view, "onLeave");
+
+      runs(function() {
+        view.render();
+        $("#test").append(view.el);
+      });
+
+      Helpers.sleep();
+
+      runs(function() {
+        expect($("#test").text()).toEqual("Orange!");
+      });
+
+      Helpers.sleep();
+
+      runs(function() {
+        view.leave();
+      });
+
+      Helpers.sleep();
+
+      runs(function() {
+        expect($("#test").text()).toEqual("");
+        expect(spy.called).toBeTruthy();
+      });
+    });
+  });
+ */
+
+  describe("#bindTo", function() {
+    var view = new orangeView();
+    var callback = sinon.spy();
+    var source = new Backbone.Model({
+        title: 'Model or Collection'
+    });
+
+    it("calls the unbindFromAll method when leaving the view", function() {
+      view.bindTo(source, 'foobar', callback);
+      expect(view.bindings.length).toEqual(1);
+    });
+  });
+
+  describe("#unbindFromAll", function() {
+    var view = new orangeView();
+    var spy = sinon.spy(view, 'unbindFromAll');
+    var callback = sinon.spy();
+    var source = new Backbone.Model({
+        title: 'Model or Collection'
+    });
+
+    runs(function() {
+      view.render();
+      view.bindTo(source, 'foo', callback);
+      expect(view.bindings.length).toEqual(1);
+    });
+
+    Helpers.sleep();
+
+    runs(function() {
+      view.leave();
+    });
+
+    Helpers.sleep();
+
+    it("calls the unbindFromAll method when leaving the view", function() {
+      runs(function() {
+        expect(spy.called).toBeTruthy();
+      });
+    });
+  });
+
 });
