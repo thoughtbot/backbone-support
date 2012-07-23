@@ -1,11 +1,11 @@
 describe("Support.CompositeView", function() {
   var orangeView = Support.CompositeView.extend({
     initialize: function() {
-      this.bind('onLeave', this.onLeave);
+      this.bind('leave', this.onLeave);
     },
 
-    onLeave: function() {
-      var text = this.make("span", {}, "onLeave!");
+   onLeave: function() {
+      var text = this.make("span", {}, "Leave!");
       $(this.el).append(text);
     },
 
@@ -134,7 +134,7 @@ describe("Support.CompositeView", function() {
       });
     });
 
-    it("triggers the onLeave event", function() {
+    it("triggers the leave event", function() {
       var view = new orangeView();
       var spy = sinon.spy(view, "trigger");
       var stubRemove = sinon.stub(view, "remove");
@@ -156,8 +156,8 @@ describe("Support.CompositeView", function() {
 
       runs(function() {
         expect(spy.called).toBeTruthy();
-        expect(spy.getCall(0).args[0]).toEqual('onLeave');
-        expect($("#test").text()).toEqual("onLeave!Orange!");
+        expect(spy.getCall(0).args[0]).toEqual('leave');
+        expect($("#test").text()).toEqual("Leave!Orange!");
       });
     });
 
