@@ -42,12 +42,22 @@ describe("Support.CompositeView", function() {
   describe("#renderChildInto", function() {
     it("renders child into the given element and replaces content there", function() {
       $("#test1").text("Replace this!");
+      $("#test").append($("#test1"));
 
       var view = new blankView({el: "#test"});
       view.renderChildInto(new orangeView(), "#test1");
 
-      expect($("#test").text()).toEqual("");
       expect($("#test1").text()).toEqual("Orange!");
+
+      $("#test1").remove();
+      expect($("#test").text()).toEqual("");
+    });
+
+    it("renders child into a sub-element of the view, even if it is not yet added to the document", function() {
+      var view = new blankView({el: $('<div><div class="inside"></div></div>')});
+      view.renderChildInto(new orangeView(), ".inside");
+
+     expect($(view.el).find('.inside').text()).toEqual("Orange!"); 
     });
   });
 
