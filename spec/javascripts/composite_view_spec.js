@@ -74,12 +74,22 @@ describe("Support.CompositeView", function() {
   describe("#appendChildTo", function() {
     it("appends child into the given element", function() {
       $("#test1").text("Append to this!");
-  
+      $("#test").append($("#test1"));
+
       var view = new blankView({el: "#test"});
       view.appendChildTo(new orangeView(), "#test1");
-  
-      expect($("#test").text()).toEqual("");
+
       expect($("#test1").text()).toEqual("Append to this!Orange!");
+      
+      $("#test1").remove();
+      expect($("#test").text()).toEqual("");
+    });
+
+    it("appends child into a sub-element even if it is not added to the document", function() {
+      var view = new blankView({el: $('<div><div class="inside">Append to this!</div></div>')});
+      view.appendChildTo(new orangeView(), ".inside");
+
+      expect($(view.el).find('.inside').text()).toEqual("Append to this!Orange!"); 
     });
   });
   
