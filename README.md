@@ -177,4 +177,4 @@ require("/vendor/plugins/backbone-support/lib/assets/javascripts/backbone-suppor
 
 ## License
 
-Copyright 2011 thoughtbot. Please check LICENSE for more details.
+Copyright 2012 thoughtbot. Please check LICENSE for more details.
