@@ -163,5 +163,26 @@ describe("Support.CompositeView", function() {
       expect($("#test2").size()).toEqual(1);
       expect(view.children.size()).toEqual(1);
     });
+
+    it("removes any bindings that were bound via bindTo", function() {
+      var model1 = new Backbone.Model({}),
+          model2 = new Backbone.Model({}),
+          eventListener = sinon.spy(),
+          bindToView = new (Support.CompositeView.extend({
+            initialize: function(options) {
+              this.bindTo(options.model1, 'change', eventListener);
+              this.bindTo(options.model2, 'change', eventListener);
+            }
+          }))({
+            model1: model1,
+            model2: model2
+          });
+
+      bindToView.leave();
+      model1.trigger('change');
+      model2.trigger('change');
+
+      expect(eventListener.called).toBeFalsy();
+    });
   });
 });

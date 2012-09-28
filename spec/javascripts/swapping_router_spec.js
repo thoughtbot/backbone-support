@@ -4,12 +4,14 @@ describe("Support.SwappingRouter", function() {
   var redView = Backbone.View.extend({
     render: function() {
       $(this.el).text("Red!");
+      return this;
     }
   });
 
   var blueView = Backbone.View.extend({
     render: function() {
       $(this.el).text("Blue!");
+      return this;
     }
   });
 
