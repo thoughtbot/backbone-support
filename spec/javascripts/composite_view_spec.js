@@ -184,5 +184,18 @@ describe("Support.CompositeView", function() {
 
       expect(eventListener.called).toBeFalsy();
     });
+
+    it("fires leave event", function() {
+      var eventListener = sinon.spy();
+      var view = new (Support.CompositeView.extend({
+            initialize: function(options) {
+              this.bindTo(this, 'leave', eventListener);
+            }
+          }))({model: {}});
+
+      view.leave();
+      
+      expect(eventListener.called).toBeTruthy();
+    });
   });
 });
