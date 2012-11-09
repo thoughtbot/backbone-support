@@ -1,6 +1,6 @@
 describe('Support.Observer', function() {
 
-  var normalView = Backbone.View.extend({
+  var normalView = Support.CompositeView.extend({
     render: function() {
       var text = this.make("span", {}, "Normal!");
       $(this.el).append(text);
@@ -9,7 +9,6 @@ describe('Support.Observer', function() {
       this.unbindFromAll();
     }
   });
-  _.extend(normalView.prototype, Support.Observer);
 
   beforeEach(function() {
     Helpers.setup();
