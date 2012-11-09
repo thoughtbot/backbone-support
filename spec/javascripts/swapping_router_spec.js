@@ -77,7 +77,7 @@ describe("Support.SwappingRouter", function() {
 
   it("renders and swaps backbone views", function() {
     runs(function() {
-      router.navigate('red', {trigger: true});
+      window.location.hash = "#red"
     });
 
     Helpers.sleep();
