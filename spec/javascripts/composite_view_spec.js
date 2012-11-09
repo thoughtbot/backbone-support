@@ -201,39 +201,6 @@ describe("Support.CompositeView", function() {
     });
   });
 
-  /*
-  describe("#onLeave", function() {
-    it("fires callback onLeave before view is removed", function() {
-      var view = new orangeView();
-      var spy = sinon.spy(view, "onLeave");
-
-      runs(function() {
-        view.render();
-        $("#test").append(view.el);
-      });
-
-      Helpers.sleep();
-
-      runs(function() {
-        expect($("#test").text()).toEqual("Orange!");
-      });
-
-      Helpers.sleep();
-
-      runs(function() {
-        view.leave();
-      });
-
-      Helpers.sleep();
-
-      runs(function() {
-        expect($("#test").text()).toEqual("");
-        expect(spy.called).toBeTruthy();
-      });
-    });
-  });
- */
-
   describe("#bindTo", function() {
     var view = new orangeView();
     var callback = sinon.spy();
