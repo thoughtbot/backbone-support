@@ -91,6 +91,15 @@ describe("Support.CompositeView", function() {
 
       expect($(view.el).find('.inside').text()).toEqual("Append to this!Orange!"); 
     });
+
+    it("appends the element only to elements inside the view", function(){
+      var view = new blankView({el: $('<div><div class="main">Append to this!</div></div>')});
+      var div = $("<div class='main' id='outside'></div>");
+      view.appendChildTo(new orangeView(), ".main");
+
+      expect($(view.el).find('.main').text()).toEqual("Append to this!Orange!");
+      expect($("#outside").text()).toEqual("");
+    });
   });
   
   describe("#prependChild", function() {
@@ -108,10 +117,28 @@ describe("Support.CompositeView", function() {
       $("#test1").text("Prepend to this!");
   
       var view = new blankView({el: "#test"});
+      expect($("#test").text()).toEqual("");
+
+      $("#test").append($("#test1"));
       view.prependChildTo(new orangeView(), "#test1");
   
-      expect($("#test").text()).toEqual("");
       expect($("#test1").text()).toEqual("Orange!Prepend to this!");
+    });
+
+    it("prepends child into a sub-element even if it is not added to the document", function() {
+      var view = new blankView({el: $('<div><div class="inside">Prepend to this!</div></div>')});
+      view.prependChildTo(new orangeView(), ".inside");
+
+      expect($(view.el).find('.inside').text()).toEqual("Orange!Prepend to this!");
+    });
+    
+    it("prepends the element only to elements inside the view", function(){
+      var view = new blankView({el: $('<div><div class="main">Prepend to this!</div></div>')});
+      var div = $("<div class='main' id='outside'></div>");
+      view.prependChildTo(new orangeView(), ".main");
+
+      expect($(view.el).find('.main').text()).toEqual("Orange!Prepend to this!");
+      expect($("#outside").text()).toEqual("");
     });
   });
 
