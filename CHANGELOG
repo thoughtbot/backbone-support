@@ -1,3 +1,9 @@
+0.3.1 (March 05, 2013)
+
+Views fire 'leave' event when calling leave()
+renderChildInto works with elements not yet rendered
+Refactoring
+
 0.3.0
 
 CompositeView provides this.bindTo(source, event, callback) to provide easy
