@@ -1,5 +1,3 @@
-source :rubygems
+source 'https://rubygems.org'
 
-gem 'jasmine'
-gem 'headless'
-gem 'rake'
+gemspec
