@@ -122,13 +122,15 @@ This should be _above_ any usage of SwappingController or SwappingRouter, but
 below the inclusion of Backbone.js, Underscore, and jQuery.
 
 If you do not wish to include all of backbone-support, you can include
-individual pieces.  First, require the main support file:
+individual pieces.  Require the support file(s) and the individual assets you wish to use:
 
     //= require backbone-support/support
-
-Then require the individual assets you wish to use:
-
     //= require backbone-support/swapping_router
+
+or:
+
+    //= require backbone-support/support
+    //= require backbone-support/observer
     //= require backbone-support/composite_view
 
 ### With Jammit
