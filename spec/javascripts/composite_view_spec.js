@@ -246,6 +246,18 @@ describe("Support.CompositeView", function() {
     });
   });
 
+  describe("#swapped", function() {
+    it("fires 'swapped' event", function() {
+      var eventListener = sinon.spy()
+      var view = new Support.CompositeView
+      view.bind('swapped', eventListener)
+
+      view.swapped();
+
+      expect(eventListener.called).toBeTruthy();
+    });
+  });
+
   describe("#bindTo", function() {
     var view = new orangeView();
     var callback = sinon.spy();
@@ -287,5 +299,4 @@ describe("Support.CompositeView", function() {
       });
     });
   });
-
 });

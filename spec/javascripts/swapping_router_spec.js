@@ -16,8 +16,8 @@ describe("Support.SwappingRouter", function() {
   });
 
   var leaveView = Backbone.View.extend({
-    leave: function() {
-    }
+    leave: function() {},
+    swapped: function() {},
   });
   var leaveViewInstance = new leaveView();
 
@@ -117,6 +117,20 @@ describe("Support.SwappingRouter", function() {
     runs(function() {
       expect($("#test").text()).toEqual("Red!");
       expect(spy.called).toBeTruthy();
+    });
+  });
+
+  it("calls .swapped on the view after swapping", function() {
+    var spy = sinon.spy(leaveViewInstance, "swapped");
+
+    runs(function() {
+      window.location.hash = "#leave"
+    });
+
+    Helpers.sleep()
+
+    runs(function() {
+      expect(spy.called).toBeTruthy()
     });
   });
 });
