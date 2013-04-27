@@ -11,9 +11,9 @@
 #   - dist/**/*.js
 #
 src_files:
-    - vendor/jquery.js
-    - vendor/underscore.js
-    - vendor/backbone.js
+    - spec/javascripts/support/jquery.js
+    - vendor/assets/javascripts/underscore.js
+    - vendor/assets/javascripts/backbone.js
     - lib/assets/javascripts/backbone-support.js
     - lib/assets/javascripts/backbone-support/support.js
     - lib/assets/javascripts/backbone-support/observer.js

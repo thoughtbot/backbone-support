@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/thoughtbot/backbone-support.png?branch=master)](https://travis-ci.org/thoughtbot/backbone-support)
 
-There's no built-in garbage collection for Backbone’s event bindings, and 
+There's no built-in garbage collection for Backbone’s event bindings, and
 forgetting to unbind can cause bugs and memory leaks.
 
 Backbone Support currently provides two utility classes, SwappingRouter and CompositeView,
@@ -72,7 +72,7 @@ parent view.
 
 `CompositeView` maintains an array of its immediate children as
 `this.children`. Using this reference, a parent view's `leave()`
-method will invoke `leave()` on all its children, ensuring that an entire 
+method will invoke `leave()` on all its children, ensuring that an entire
 tree of composed views is cleaned up properly.
 
 For child views that can dismiss themselves, such as dialog boxes, children
@@ -81,11 +81,25 @@ maintain a back-reference at `this.parent`. This is used to reach up and call
 
 ## Dependencies
 
-You'll need these, but chances are you already have them in your app:
+Backbone Support requires the following dependencies:
 
 * jQuery or Zepto
 * Underscore
 * Backbone
+
+### Included Versions
+
+For convenience, Backbone Support comes with a vendored copy of Backbone and
+Underscore to get you up and running as quickly as possible. If you want to
+use these included files, simply follow the instructions below in the
+[Installation][] section.
+
+### Alternate Versions
+
+If you require a different version of Backbone or Underscore than those provided
+by this gem, simply put them in `vendor/assets/javascripts` and they will
+take higher precedence than the versions provided by the gem thanks to the
+ordering of the [search paths in the asset pipeline][].
 
 ## Development
 
@@ -122,13 +136,15 @@ This should be _above_ any usage of SwappingController or SwappingRouter, but
 below the inclusion of Backbone.js, Underscore, and jQuery.
 
 If you do not wish to include all of backbone-support, you can include
-individual pieces.  First, require the main support file:
+individual pieces.  Require the support file(s) and the individual assets you wish to use:
 
     //= require backbone-support/support
-
-Then require the individual assets you wish to use:
-
     //= require backbone-support/swapping_router
+
+or:
+
+    //= require backbone-support/support
+    //= require backbone-support/observer
     //= require backbone-support/composite_view
 
 ### With Jammit
@@ -182,3 +198,6 @@ require("/vendor/plugins/backbone-support/lib/assets/javascripts/backbone-suppor
 ## License
 
 Copyright 2012 thoughtbot. Please check LICENSE for more details.
+
+[Installation]: https://github.com/thoughtbot/backbone-support#installation
+[search paths in the asset pipeline]: http://edgeguides.rubyonrails.org/asset_pipeline.html#search-paths
