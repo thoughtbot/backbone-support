@@ -2,15 +2,17 @@
 
 [![Build Status](https://travis-ci.org/thoughtbot/backbone-support.png?branch=master)](https://travis-ci.org/thoughtbot/backbone-support)
 
-There's no built-in garbage collection for Backbone’s event bindings, and
-forgetting to unbind can cause bugs and memory leaks.
+Backbone Support provides a collection of utility classes for use with
+[Backbone.js][]. There's no built-in garbage collection for Backbone’s event
+bindings, and forgetting to unbind can cause bugs and memory leaks. Backbone
+Support has your covered.
 
-Backbone Support currently provides two utility classes, SwappingRouter and CompositeView,
-that introduce a `leave()` function, which unbinds and cleans up the view.
-They should be used where views are instantiated (in Router instances and in composite views).
+Backbone Support currently provides two utility classes, SwappingRouter and
+CompositeView, that introduce a `leave()` function, which unbinds and cleans up
+the view.  They should be used where views are instantiated (in Router
+instances and in composite views).
 
-Inspired by our projects and the Backbone.js on Rails book:
-http://workshops.thoughtbot.com/backbone-js-on-rails
+Inspired by our projects and the [Backbone.js on Rails book][].
 
 The book contains complete instructions and in-depth coverage of the internals
 of CompositeView and SwappingRouter, and an example application that shows
@@ -81,7 +83,7 @@ maintain a back-reference at `this.parent`. This is used to reach up and call
 
 ## Dependencies
 
-Backbone Support requires the following dependencies:
+Backbone Support has the following dependencies:
 
 * jQuery or Zepto
 * Underscore
@@ -96,30 +98,18 @@ use these included files, simply follow the instructions below in the
 
 ### Alternate Versions
 
-If you require a different version of Backbone or Underscore than those provided
-by this gem, simply put them in `vendor/assets/javascripts` and they will
-take higher precedence than the versions provided by the gem thanks to the
-ordering of the [search paths in the asset pipeline][].
-
-## Development
-
-First:
-
-    bundle
-
-While TDD'ing:
-
-    bundle exec rake jasmine
-
-To not open tests in a browser window:
-
-    bundle exec rake jasmine:ci
+If you require a different version of Backbone or Underscore than those
+provided by this gem, simply put the script files in
+`vendor/assets/javascripts` and they will take higher precedence than the
+versions provided by the gem thanks to the ordering of the [search paths in the
+asset pipeline][].
 
 ## Installation
 
-The recommended usage is with Rails 3.1.
+The recommended usage is with Rails 3.1 or higher to take advantage of the
+asset pipeline.
 
-### With Rails 3.1
+### With Rails 3.1 or higher
 
 Add the gem to your Gemfile
 
@@ -127,8 +117,19 @@ Add the gem to your Gemfile
 
 And then `bundle install`
 
-In your application.js, or in whatever file your backbone.js assets are
-required in, add the following:
+Before including any part of Backbone Support, you must include its
+dependencies. In your application.js or any other manifest file, add the
+following to load in the needed dependencies:
+
+    // jQuery is provided by the 'jquery-rails' gem, included with Rails
+    //= require jquery
+    //
+    // Backbone Support includes Backbone and Underscore, or you can provides
+    // alternate versions by placing them in vendor/assets/javascripts/
+    //= require backbone
+    //= require underscore
+
+To require all of Backbone Support, add the following:
 
     //= require backbone-support
 
@@ -136,7 +137,8 @@ This should be _above_ any usage of SwappingController or SwappingRouter, but
 below the inclusion of Backbone.js, Underscore, and jQuery.
 
 If you do not wish to include all of backbone-support, you can include
-individual pieces.  Require the support file(s) and the individual assets you wish to use:
+individual pieces.  Require the support file and the individual assets you
+wish to use:
 
     //= require backbone-support/support
     //= require backbone-support/swapping_router
@@ -195,9 +197,26 @@ require("/vendor/plugins/backbone-support/lib/assets/javascripts/backbone-suppor
 require("/vendor/plugins/backbone-support/lib/assets/javascripts/backbone-support/swapping_router.js");
 ```
 
+## Development
+
+First:
+
+    bundle
+
+While TDD'ing:
+
+    bundle exec rake jasmine
+
+To not open tests in a browser window:
+
+    bundle exec rake jasmine:ci
+
 ## License
 
-Copyright 2012 thoughtbot. Please check LICENSE for more details.
+Copyright 2012 thoughtbot. Please check [LICENSE][] for more details.
 
 [Installation]: https://github.com/thoughtbot/backbone-support#installation
 [search paths in the asset pipeline]: http://edgeguides.rubyonrails.org/asset_pipeline.html#search-paths
+[Backbone.js on Rails book]: https://learn.thoughtbot.com/products/1-backbone-js-on-rails
+[Backbone.js]: http://backbonejs.org/
+[LICENSE]: https://github.com/thoughtbot/backbone-support/blob/master/LICENSE
