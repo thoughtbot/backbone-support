@@ -1,3 +1,7 @@
+# Backbone Support
+
+[![Build Status](https://travis-ci.org/thoughtbot/backbone-support.png?branch=master)](https://travis-ci.org/thoughtbot/backbone-support)
+
 There's no built-in garbage collection for Backbone’s event bindings, and 
 forgetting to unbind can cause bugs and memory leaks.
 
