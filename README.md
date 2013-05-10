@@ -5,12 +5,12 @@
 Backbone Support provides a collection of utility classes for use with
 [Backbone.js][]. There's no built-in garbage collection for Backbone’s event
 bindings, and forgetting to unbind can cause bugs and memory leaks. Backbone
-Support has your covered.
+Support has you covered.
 
-Backbone Support currently provides two utility classes, SwappingRouter and
-CompositeView, that introduce a `leave()` function, which unbinds and cleans up
-the view.  They should be used where views are instantiated (in Router
-instances and in composite views).
+Backbone Support provides two utility classes, SwappingRouter and
+CompositeView, which are extensions of Backbone's standard View and Router
+objects. They provide methods that simplify creating and managing nested views
+and automate the cleanup of events when switching between views.
 
 Inspired by our projects and the [Backbone.js on Rails book][].
 
@@ -83,7 +83,7 @@ maintain a back-reference at `this.parent`. This is used to reach up and call
 
 ## Dependencies
 
-Backbone Support has the following dependencies:
+Backbone Support requires the following libraries:
 
 * jQuery or Zepto
 * Underscore
@@ -100,25 +100,25 @@ use these included files, simply follow the instructions below in the
 
 If you require a different version of Backbone or Underscore than those
 provided by this gem, simply put the script files in
-`vendor/assets/javascripts` and they will take higher precedence than the
-versions provided by the gem thanks to the ordering of the [search paths in the
-asset pipeline][].
+`vendor/assets/javascripts` which has higher precedence than the versions
+provided by the gem thanks to the ordering of the [search paths in the asset
+pipeline][].
 
 ## Installation
 
-The recommended usage is with Rails 3.1 or higher to take advantage of the
-asset pipeline.
+We recommend you use Backbone-Support with Rails 3.1 or higher in order to take
+advantage of the asset pipeline.
 
 ### With Rails 3.1 or higher
 
-Add the gem to your Gemfile
+Add the gem to your Gemfile:
 
     gem "backbone-support"
 
-And then `bundle install`
+And then `bundle install`.
 
 Before including any part of Backbone Support, you must include its
-dependencies. In your application.js or any other manifest file, add the
+dependencies. In your application.js (or any other manifest file), add the
 following to load in the needed dependencies:
 
     // jQuery is provided by the 'jquery-rails' gem, included with Rails
