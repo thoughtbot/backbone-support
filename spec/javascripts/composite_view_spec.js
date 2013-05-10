@@ -1,7 +1,7 @@
 describe("Support.CompositeView", function() {
   var orangeView = Support.CompositeView.extend({
     render: function() {
-      var text = this.make("span", {}, "Orange!");
+      var text = $("<span>").html("Orange!");
       $(this.el).append(text);
     }
   });
@@ -13,7 +13,7 @@ describe("Support.CompositeView", function() {
 
   var normalView = Backbone.View.extend({
     render: function() {
-      var text = this.make("span", {}, "Normal!");
+      var text = $("<span>").html("Normal!");
       $(this.el).append(text);
     }
   });

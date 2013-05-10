@@ -1,6 +1,4 @@
-# Backbone Support
-
-[![Build Status](https://travis-ci.org/thoughtbot/backbone-support.png?branch=master)](https://travis-ci.org/thoughtbot/backbone-support)
+# Backbone Support [![Build Status](https://travis-ci.org/thoughtbot/backbone-support.png?branch=master)](https://travis-ci.org/thoughtbot/backbone-support) [![Gem Version](https://badge.fury.io/rb/backbone-support.png)](https://rubygems.org/gems/backbone-support)
 
 Backbone Support provides a collection of utility classes for use with
 [Backbone.js][]. There's no built-in garbage collection for Backbone’s event
@@ -81,6 +79,11 @@ For child views that can dismiss themselves, such as dialog boxes, children
 maintain a back-reference at `this.parent`. This is used to reach up and call
 `this.parent.removeChild(this)` for these self-dismissing views.
 
+## Compatibility
+
+Backbone Support is compatible with Backbone v0.5.3 and higher, including
+Backbone v1.0 (as of Backbone Support v0.4.0).
+
 ## Dependencies
 
 Backbone Support requires the following libraries:
@@ -94,7 +97,10 @@ Backbone Support requires the following libraries:
 For convenience, Backbone Support comes with a vendored copy of Backbone and
 Underscore to get you up and running as quickly as possible. If you want to
 use these included files, simply follow the instructions below in the
-[Installation][] section.
+[Installation][] section. The current vendored versions are:
+
+- Backbone v1.0.0
+- Underscore v1.4.4
 
 ### Alternate Versions
 

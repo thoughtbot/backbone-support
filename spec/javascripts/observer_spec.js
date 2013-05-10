@@ -2,7 +2,7 @@ describe('Support.Observer', function() {
 
   var normalView = Support.CompositeView.extend({
     render: function() {
-      var text = this.make("span", {}, "Normal!");
+      var text = $("<span>").html("Normal!");
       $(this.el).append(text);
     },
     leave: function() {
