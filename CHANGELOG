@@ -1,3 +1,12 @@
+0.3.2 (April 27, 2013)
+
+- Backbone support now includes a vendored version of Backbone and Underscore
+  for use with the asset pipeline.
+- SwappingRouter now calls 'swapped' method on new view as it is added to the
+  DOM. CompositeView emits an associated 'swapped' event.
+- CompositeView#prependChildTo is now properly scoped to the view thanks to nhocki
+- Backbone Support is now on Travis for continuous integration
+
 0.3.1 (March 05, 2013)
 
 Views fire 'leave' event when calling leave()
