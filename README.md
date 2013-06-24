@@ -30,34 +30,38 @@ Now, a `SwappingRouter` can take advantage of the `leave()` function, and
 clean up any existing views before swapping to a new one.  It swaps into a new
 view by rendering that view into its own `el`:
 
-    swap: function(newView) {
-      if (this.currentView && this.currentView.leave) {
-        this.currentView.leave();
-      }
+``` js
+swap: function(newView) {
+  if (this.currentView && this.currentView.leave) {
+    this.currentView.leave();
+  }
 
-      this.currentView = newView;
-      $(this.el).empty().append(this.currentView.render().el);
-    }
+  this.currentView = newView;
+  $(this.el).empty().append(this.currentView.render().el);
+}
+```
 
 An example SwappingRouter would look as follows:
 
-    Trajectory.Routers.Stories = Support.SwappingRouter.extend({
-      initialize: function(options) {
-        this.el = $("div.primary_content");
-      },
-      routes: {
-        "stories": "index",
-        "stories/new": "newStory"
-      }
-      index: function() {
-        var view = new Trajectory.Views.StoriesIndex();
-        this.swap(view);
-      },
-      newStory: function() {
-        var view = new Trajectory.Views.StoryNew({ model: new Story() });
-        this.swap(view);
-      }
-    }
+``` js
+Trajectory.Routers.Stories = Support.SwappingRouter.extend({
+  initialize: function(options) {
+    this.el = $("div.primary_content");
+  },
+  routes: {
+    "stories": "index",
+    "stories/new": "newStory"
+  }
+  index: function() {
+    var view = new Trajectory.Views.StoriesIndex();
+    this.swap(view);
+  },
+  newStory: function() {
+    var view = new Trajectory.Views.StoryNew({ model: new Story() });
+    this.swap(view);
+  }
+}
+```
 
 ### CompositeView
 
@@ -119,7 +123,9 @@ advantage of the asset pipeline.
 
 Add the gem to your Gemfile:
 
-    gem "backbone-support"
+``` ruby
+gem "backbone-support"
+```
 
 And then `bundle install`.
 
@@ -158,7 +164,6 @@ or:
 ### With Jammit
 
 First off:
-
     rails plugin install git@github.com:thoughtbot/backbone-support.git
 
 In your `config/application.rb`:
