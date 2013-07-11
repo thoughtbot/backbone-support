@@ -262,4 +262,11 @@ describe("Support.CompositeView", function() {
       expect(eventListener.called).toBeTruthy();
     });
   });
+
+  describe("class", function() {
+    it("respects instanceof", function() {
+      var view = new Support.CompositeView;
+      expect(view instanceof Backbone.View).toBeTruthy();
+    })
+  });
 });
