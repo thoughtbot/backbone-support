@@ -263,19 +263,6 @@ describe("Support.CompositeView", function() {
     });
   });
 
-  describe("#bindTo", function() {
-    var view = new orangeView();
-    var callback = sinon.spy();
-    var source = new Backbone.Model({
-        title: 'Model or Collection'
-    });
-
-    it("calls the unbindFromAll method when leaving the view", function() {
-      view.bindTo(source, 'foobar', callback);
-      expect(view.bindings.length).toEqual(1);
-    });
-  });
-
   describe("#unbindFromAll", function() {
     it("calls the unbindFromAll method when leaving the view", function() {
       var view = new orangeView();
@@ -287,9 +274,6 @@ describe("Support.CompositeView", function() {
 
       view.render();
       view.bindTo(source, 'foo', callback);
-
-      expect(view.bindings.length).toEqual(1);
-
       view.leave();
 
       expect(spy.called).toBeTruthy();

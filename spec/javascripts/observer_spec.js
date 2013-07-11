@@ -24,7 +24,7 @@ describe('Support.Observer', function() {
     var view, spy, source, callback;
     beforeEach(function() { Helpers.setup();
       view = new normalView();
-      spy = sinon.spy(view, "bindTo");
+      spy = sinon.spy(view, "listenTo");
       callback = sinon.spy();
 
       source = new Backbone.Model({
@@ -36,17 +36,9 @@ describe('Support.Observer', function() {
       view, spy, source, callback = null;
     });
 
-    it("should add the event to the bindings for the view", function() {
-      view.bindTo(source, 'foobar', callback);
-      expect(view.bindings.length).toEqual(1);
-    });
-
-    it("binds the event to the source object", function() {
-      var mock = sinon.mock(source).expects('bind').once();
-
+    it("calls listenTo on this", function() {
       view.bindTo(source, 'change:title', callback);
-
-      mock.verify();
+      expect(spy.called).toBeTruthy();
     });
   });
 
@@ -56,16 +48,15 @@ describe('Support.Observer', function() {
     beforeEach(function() {
       view = new normalView();
       spy = sinon.spy(view, 'unbindFromAll');
+      stopListeningSpy = sinon.spy(view, 'stopListening');
       callback = sinon.spy();
       source = new Backbone.Model({
         title: 'Model or Collection'
       });
-      unbindSpy = sinon.spy(source, 'unbind');
 
       view.render();
       view.bindTo(source, 'foo', callback);
       view.bindTo(source, 'bar', callback);
-      expect(view.bindings.length).toEqual(2);
 
       view.leave();
     });
@@ -74,12 +65,8 @@ describe('Support.Observer', function() {
       expect(spy.called).toBeTruthy();
     });
 
-    it("calls unbind on the source object", function() {
-      expect(unbindSpy.calledTwice).toBeTruthy();
-    });
-
-    it("removes all the views bindings attached with bindTo", function() {
-      expect(view.bindings.length).toEqual(0);
+    it("calls stopListening on this", function() {
+      expect(stopListeningSpy.called).toBeTruthy();
     });
   });
 
