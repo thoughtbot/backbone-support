@@ -269,7 +269,6 @@ describe("Support.CompositeView", function() {
     runs(function() {
       view.render();
       view.bindTo(source, 'foo', callback);
-      expect(view.bindings.length).toEqual(1);
     });
 
     Helpers.sleep();
