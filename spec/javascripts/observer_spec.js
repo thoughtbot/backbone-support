@@ -36,7 +36,7 @@ describe('Support.Observer', function() {
       view, spy, source, callback = null;
     });
 
-    it("call listenTo on this", function() {
+    it("calls listenTo on this", function() {
       view.bindTo(source, 'change:title', callback);
       expect(spy.called).toBeTruthy();
     });
