@@ -38,6 +38,24 @@ describe("Support.CompositeView", function() {
       expect($("#test1").text()).toEqual("Orange!");
       expect($("#test2").text()).toEqual("Orange!");
     });
+
+    it("sets parent before rendering child view", function() {
+      var view = new blankView();
+      var spy = sinon.spy(view, 'on');
+      var viewWithParentBinding = Support.CompositeView.extend({
+        render: function() {
+          this.listenTo(this.parent, 'foo', this.foo);
+          return this;
+        },
+
+        foo: function() {
+        }
+      });
+
+      view.renderChild(new viewWithParentBinding({ el: "#test1" }));
+
+      expect(spy.called).toBeTruthy();
+    });
   });
 
   describe("#renderChildInto", function() {
