@@ -1,3 +1,4 @@
+/* global Helpers, Support */
 describe("Support.CompositeView", function() {
   var orangeView = Support.CompositeView.extend({
     render: function() {
@@ -38,7 +39,7 @@ describe("Support.CompositeView", function() {
       expect($("#test2").text()).toEqual("Orange!");
     });
   });
-  
+
   describe("#renderChildInto", function() {
     it("renders child into the given element and replaces content there", function() {
       $("#test1").text("Replace this!");
@@ -57,7 +58,7 @@ describe("Support.CompositeView", function() {
       var view = new blankView({el: $('<div><div class="inside"></div></div>')});
       view.renderChildInto(new orangeView(), ".inside");
 
-     expect($(view.el).find('.inside').text()).toEqual("Orange!"); 
+      expect($(view.el).find('.inside').text()).toEqual("Orange!");
     });
   });
 
@@ -80,7 +81,7 @@ describe("Support.CompositeView", function() {
       view.appendChildTo(new orangeView(), "#test1");
 
       expect($("#test1").text()).toEqual("Append to this!Orange!");
-      
+
       $("#test1").remove();
       expect($("#test").text()).toEqual("");
     });
@@ -89,7 +90,7 @@ describe("Support.CompositeView", function() {
       var view = new blankView({el: $('<div><div class="inside">Append to this!</div></div>')});
       view.appendChildTo(new orangeView(), ".inside");
 
-      expect($(view.el).find('.inside').text()).toEqual("Append to this!Orange!"); 
+      expect($(view.el).find('.inside').text()).toEqual("Append to this!Orange!");
     });
 
     it("appends the element only to elements inside the view", function(){
@@ -101,27 +102,27 @@ describe("Support.CompositeView", function() {
       expect($("#outside").text()).toEqual("");
     });
   });
-  
+
   describe("#prependChild", function() {
     it("renders and prepends children views", function() {
       var view = new blankView({el: "#test"});
       view.prependChild(new orangeView());
       view.prependChild(new normalView());
-  
+
       expect($("#test").text()).toEqual("Normal!Orange!");
     });
   });
-  
+
   describe("#prependChildTo", function() {
     it("prepends child into the given element", function() {
       $("#test1").text("Prepend to this!");
-  
+
       var view = new blankView({el: "#test"});
       expect($("#test").text()).toEqual("");
 
       $("#test").append($("#test1"));
       view.prependChildTo(new orangeView(), "#test1");
-  
+
       expect($("#test1").text()).toEqual("Orange!Prepend to this!");
     });
 
@@ -131,7 +132,7 @@ describe("Support.CompositeView", function() {
 
       expect($(view.el).find('.inside').text()).toEqual("Orange!Prepend to this!");
     });
-    
+
     it("prepends the element only to elements inside the view", function(){
       var view = new blankView({el: $('<div><div class="main">Prepend to this!</div></div>')});
       var div = $("<div class='main' id='outside'></div>");
@@ -197,7 +198,7 @@ describe("Support.CompositeView", function() {
     it("removes self from parent if invoked on a child view", function() {
       var view = new blankView();
       var childView = new orangeView({el: "#test1"});
-      view.renderChild(childView)
+      view.renderChild(childView);
       view.renderChild(new orangeView({el: "#test2"}));
 
       expect($("#test1").size()).toEqual(1);
@@ -248,9 +249,9 @@ describe("Support.CompositeView", function() {
 
   describe("#swapped", function() {
     it("fires 'swapped' event", function() {
-      var eventListener = sinon.spy()
-      var view = new Support.CompositeView
-      view.bind('swapped', eventListener)
+      var eventListener = sinon.spy();
+      var view = new Support.CompositeView;
+      view.bind('swapped', eventListener);
 
       view.swapped();
 
@@ -276,7 +277,7 @@ describe("Support.CompositeView", function() {
     var spy = sinon.spy(view, 'unbindFromAll');
     var callback = sinon.spy();
     var source = new Backbone.Model({
-        title: 'Model or Collection'
+      title: 'Model or Collection'
     });
 
     runs(function() {
