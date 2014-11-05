@@ -1,5 +1,14 @@
 # Backbone Support [![Build Status](https://travis-ci.org/thoughtbot/backbone-support.png?branch=master)](https://travis-ci.org/thoughtbot/backbone-support) [![Gem Version](https://badge.fury.io/rb/backbone-support.png)](https://rubygems.org/gems/backbone-support)
 
+## No Longer Maintained
+
+This project is no longer being actively maintained. If you're interested in
+taking over this project, please get in touch. You can reach us by emailing
+[hello@thoughtbot.com](mailto:hello@thoughtbot.com) or by contacting
+[@thoughtbot on Twitter](https://twitter.com/thoughtbot).
+
+## Summary
+
 Backbone Support provides a collection of utility classes for use with
 [Backbone.js][]. There's no built-in garbage collection for Backbone’s event
 bindings, and forgetting to unbind can cause bugs and memory leaks. Backbone
