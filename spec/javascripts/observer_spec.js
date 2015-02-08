@@ -52,6 +52,7 @@ describe('Support.Observer', function() {
 
   describe("#unbindFromAll", function() {
     var view, spy, mock;
+
     beforeEach(function() {
       view = new normalView();
       spy = sinon.spy(view, 'unbindFromAll');
@@ -61,38 +62,24 @@ describe('Support.Observer', function() {
       });
       unbindSpy = sinon.spy(source, 'unbind');
 
-      runs(function() {
-        view.render();
-        view.bindTo(source, 'foo', callback);
-        view.bindTo(source, 'bar', callback);
-        expect(view.bindings.length).toEqual(2);
-      });
+      view.render();
+      view.bindTo(source, 'foo', callback);
+      view.bindTo(source, 'bar', callback);
+      expect(view.bindings.length).toEqual(2);
 
-      Helpers.sleep();
-
-      runs(function() {
-        view.leave();
-      });
-
-      Helpers.sleep();
+      view.leave();
     });
 
     it("calls the unbindFromAll method when leaving the view", function() {
-      runs(function() {
-        expect(spy.called).toBeTruthy();
-      });
+      expect(spy.called).toBeTruthy();
     });
 
     it("calls unbind on the source object", function() {
-      runs(function() {
-        expect(unbindSpy.calledTwice).toBeTruthy();
-      });
+      expect(unbindSpy.calledTwice).toBeTruthy();
     });
 
     it("removes all the views bindings attached with bindTo", function() {
-      runs(function() {
-        expect(view.bindings.length).toEqual(0);
-      });
+      expect(view.bindings.length).toEqual(0);
     });
   });
 

@@ -60,77 +60,60 @@ describe("Support.SwappingRouter", function() {
     Helpers.teardown();
   });
 
-  it("should be a backbone router", function() {
+  it("should be a backbone router", function(done) {
     var spy = sinon.spy();
     router.bind("route:index", spy);
 
-    runs(function() {
-      window.location.hash = "#test"
-    });
+    window.location.hash = "#test";
 
-    Helpers.sleep();
-
-    runs(function() {
+    setTimeout(function() {
       expect(spy.called).toBeTruthy();
-    });
+      done();
+    }, 30);
   });
 
-  it("renders and swaps backbone views", function() {
-    runs(function() {
-      window.location.hash = "#red"
-    });
+  it("renders and swaps backbone views", function(done) {
+    window.location.hash = "#red";
 
-    Helpers.sleep();
-
-    runs(function() {
+    setTimeout(function() {
       expect($("#test").text()).toEqual("Red!");
-    });
 
-    Helpers.sleep();
+      window.location.hash = "#blue";
 
-    runs(function() {
-      window.location.hash = "#blue"
-    });
+      setTimeout(function() {
+        expect($("#test").text()).toEqual("Blue!");
 
-    Helpers.sleep();
-
-    runs(function() {
-      expect($("#test").text()).toEqual("Blue!");
-    });
+        done();
+      }, 30);
+    }, 30);
   });
 
-  it("calls leave if it exists on a view", function() {
+  it("calls leave if it exists on a view", function(done) {
     var spy = sinon.spy(leaveViewInstance, "leave");
 
-    runs(function() {
-      window.location.hash = "#leave"
-    });
+    window.location.hash = "#leave";
 
-    Helpers.sleep();
+    setTimeout(function() {
+      window.location.hash = "#red";
 
-    runs(function() {
-      window.location.hash = "#red"
-    });
+      setTimeout(function() {
+        expect(spy.called).toBeTruthy();
+        expect($("#test").text()).toEqual("Red!");
 
-    Helpers.sleep();
-
-    runs(function() {
-      expect($("#test").text()).toEqual("Red!");
-      expect(spy.called).toBeTruthy();
-    });
+        done();
+      }, 30);
+    }, 30);
   });
 
-  it("calls .swapped on the view after swapping", function() {
+  it("calls .swapped on the view after swapping", function(done) {
     var spy = sinon.spy(leaveViewInstance, "swapped");
 
-    runs(function() {
-      window.location.hash = "#leave"
-    });
+    window.location.hash = "#leave";
 
-    Helpers.sleep()
-
-    runs(function() {
+    setTimeout(function() {
       expect(spy.called).toBeTruthy()
+
+      done();
     });
   });
 });

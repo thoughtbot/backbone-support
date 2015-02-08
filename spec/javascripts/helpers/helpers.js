@@ -1,8 +1,4 @@
 var Helpers = {
-  sleep: function() {
-    waits(10);
-  },
-
   setup: function() {
     this.teardown();
     this.append("test");
