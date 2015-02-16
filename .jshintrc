@@ -1,0 +1,38 @@
+{
+  "asi": false,
+  "bitwise": true,
+  "browser": true,
+  "camelcase": true,
+  "curly": true,
+  "forin": true,
+  "immed": true,
+  "latedef": "nofunc",
+  "maxlen": 80,
+  "newcap": true,
+  "noarg": true,
+  "noempty": true,
+  "nonew": true,
+  "predef": [
+    "$",
+    "jQuery",
+
+    "_",
+    "Backbone",
+    "Support",
+
+    "jasmine",
+    "beforeEach",
+    "afterEach",
+    "describe",
+    "expect",
+    "it",
+
+    "sinon",
+
+    "Helpers"
+  ],
+  "quotmark": true,
+  "trailing": true,
+  "undef": true,
+  "unused": true
+}
