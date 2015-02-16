@@ -1,0 +1,38 @@
+{
+  "name": "backbone-support",
+  "version": "0.4.0",
+  "description": "SwappingController and CompositeView for Backbone.js",
+  "main": [
+    "vendor/assets/javascripts/underscore.js",
+    "vendor/assets/javascripts/backbone.js",
+    "lib/assets/javascripts/backbone-support/support.js",
+    "lib/assets/javascripts/backbone-support/observer.js",
+    "lib/assets/javascripts/backbone-support/composite_view.js",
+    "lib/assets/javascripts/backbone-support/swapping_router.js"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/*.txt",
+    "**/.*",
+    ".jshintrc",
+    "CHANGELOG",
+    "Gemfile",
+    "Gemfile.lock",
+    "LICENSE",
+    "README.md",
+    "Rakefile",
+    "backbone-support.gemspec",
+    "spec"
+  ],
+  "homepage": "https://github.com/thoughtbot/backbone-support",
+  "authors": [
+    "thoughtbot (http://thoughtbot.com)"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/thoughtbot/backbone-support.git"
+  },
+  "keywords": [
+    "backbone"
+  ]
+}
