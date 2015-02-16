@@ -1,3 +1,12 @@
+0.5.0 (Feb 16, 2015)
+
+- Update Backbone to v1.1.2
+- Update Underscore to v1.7.0
+- Set `parent` before rendering in `CompositeView#renderChild()` so child view
+  has access to `parent` for easier event bindings.
+- Deprecate `Observer#bindTo()` and `Observer#unbindFromAll()` in favor of
+  Backbone's `Events#listenTo()` and `Events#stopListening()`.
+
 0.4.0 (May 10, 2013)
 
 - Update included Backbone to version 1.0
@@ -27,7 +36,7 @@ leave().
 0.2.0
 
 The version changes the order of when a view has render called on it when
-being swapped by a SwappingRouter. This fixes an issue in some browsers which 
+being swapped by a SwappingRouter. This fixes an issue in some browsers which
 would display a flash of unstyled content when performing certain actions in their
 render, like changing the body class. It introduces the requirement that all
 views return an instance of themselves when rendered (a fairly standard
