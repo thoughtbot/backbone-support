@@ -216,14 +216,14 @@ describe("Support.CompositeView", function() {
       expect(view.children.size()).toEqual(1);
     });
 
-    it("removes any bindings that were bound via bindTo", function() {
+    it("stops listening to events on other objects", function() {
       var model1 = new Backbone.Model({}),
           model2 = new Backbone.Model({}),
           eventListener = sinon.spy(),
           bindToView = new (Support.CompositeView.extend({
             initialize: function(options) {
-              this.bindTo(options.model1, 'change', eventListener);
-              this.bindTo(options.model2, 'change', eventListener);
+              this.listenTo(options.model1, "change", eventListener);
+              this.listenTo(options.model2, "change", eventListener);
             }
           }))({
             model1: model1,
@@ -241,7 +241,7 @@ describe("Support.CompositeView", function() {
       var eventListener = sinon.spy();
       var view = new (Support.CompositeView.extend({
         initialize: function(options) {
-          this.bindTo(this, 'leave', eventListener);
+          this.on('leave', eventListener);
         }
       }))({model: {}});
 
@@ -260,23 +260,6 @@ describe("Support.CompositeView", function() {
       view.swapped();
 
       expect(eventListener.called).toBeTruthy();
-    });
-  });
-
-  describe("#unbindFromAll", function() {
-    it("calls the unbindFromAll method when leaving the view", function() {
-      var view = new orangeView();
-      var spy = sinon.spy(view, 'unbindFromAll');
-      var callback = sinon.spy();
-      var source = new Backbone.Model({
-        title: 'Model or Collection'
-      });
-
-      view.render();
-      view.bindTo(source, 'foo', callback);
-      view.leave();
-
-      expect(spy.called).toBeTruthy();
     });
   });
 });
