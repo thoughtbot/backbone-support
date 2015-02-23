@@ -17,6 +17,6 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
 
   s.add_development_dependency('jasmine', '~> 2.0')
-  s.add_development_dependency('rake')
-  s.add_development_dependency('headless')
+  s.add_development_dependency("rake", "~> 10.4")
+  s.add_development_dependency("headless", "~> 1.0")
 end
