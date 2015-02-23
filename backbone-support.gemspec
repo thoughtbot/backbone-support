@@ -10,6 +10,7 @@ Gem::Specification.new do |s|
   s.homepage    = 'http://github.com/thoughtbot/backbone-support'
   s.summary     = 'SwappingController and CompositeView for Backbone.js'
   s.description = 'SwappingController and CompositeView for Backbone.js'
+  s.license     = "MIT"
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
