@@ -1,3 +1,8 @@
+0.5.1 (Feb 23, 2015)
+
+- Stop using deprecated APIs internally and switch to `stopListening` and
+  `listenTo`.
+
 0.5.0 (Feb 16, 2015)
 
 - Update Backbone to v1.1.2
