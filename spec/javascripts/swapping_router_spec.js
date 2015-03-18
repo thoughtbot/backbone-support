@@ -116,4 +116,8 @@ describe("Support.SwappingRouter", function() {
       done();
     });
   });
+
+  it("is instanceof Router", function() {
+    expect(router instanceof Backbone.Router).toBeTruthy();
+  });
 });
