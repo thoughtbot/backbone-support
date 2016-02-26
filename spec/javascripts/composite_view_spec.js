@@ -9,7 +9,9 @@ describe("Support.CompositeView", function() {
 
   var blankView = Support.CompositeView.extend({
     render: function() {
-    }
+    },
+
+    foo: function() {}
   });
 
   var normalView = Backbone.View.extend({
@@ -41,14 +43,12 @@ describe("Support.CompositeView", function() {
 
     it("sets parent before rendering child view", function() {
       var view = new blankView();
-      var spy = sinon.spy(view, 'on');
+      var spy = sinon.spy(view, "foo");
+
       var viewWithParentBinding = Support.CompositeView.extend({
         render: function() {
-          this.listenTo(this.parent, 'foo', this.foo);
+          this.parent.foo();
           return this;
-        },
-
-        foo: function() {
         }
       });
 
